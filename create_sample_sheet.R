@@ -1,6 +1,5 @@
-argv = commandArgs(trailingOnly = T)
-bigwig_dir = argv[1L]
 suffix=".bin1.rpkm.bw"
+bigwig_dir="./BIGWIG"
 
 fpath = list.files(bigwig_dir,pattern=suffix,full.names=T,include.dirs=F)
 fname = list.files(bigwig_dir,pattern=suffix,full.names=F,include.dirs=F)
