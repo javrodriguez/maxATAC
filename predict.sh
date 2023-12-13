@@ -1,12 +1,9 @@
 #!/bin/bash
-#SBATCH -J maxatac_predict·
-#SBATCH --mem=50gb # Job memory request
-#SBATCH --time=48:00:00 # Time limit hrs:min:sec
+#SBATCH -J maxatac_predict
+#SBATCH --mem=50gb
+#SBATCH --time=48:00:00
 #SBATCH --output=logs-prediction/predict_log_%J.log
 #SBATCH --error=logs-prediction/predict_error_%J.out
-
-sampleSheet=$1
-cp $sampleSheet sample_sheet.txt
 
 #####################################################################
 bigwig=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$1}" sample_sheet.txt)
