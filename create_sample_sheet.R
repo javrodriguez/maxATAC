@@ -7,4 +7,4 @@ fname = gsub(x=fname,pattern=suffix,replacement="")
 
 m = cbind(fpath,outdir=paste0(fname,"-maxATAC"))
 print(m)
-write.table(m,"sample_sheet.maxATAC.txt",sep="\t",row.names=F,col.names=F,quote=F)
+write.table(m,"sample_sheet,txt",sep="\t",row.names=F,col.names=F,quote=F)
