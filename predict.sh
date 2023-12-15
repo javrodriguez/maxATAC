@@ -24,5 +24,3 @@ maxatac predict -tf CTCF  \
   --blacklist /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38_maxatac_blacklist.bed \
   --chromosome_sizes /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38.chrom.sizes
  # --chromosomes chr1
-
-rm -f sample_sheet.txt
