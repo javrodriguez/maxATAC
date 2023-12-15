@@ -1,28 +1,29 @@
-#!/bin/bash
-#SBATCH -J maxatac_predict
-#SBATCH --mem=50gb
-#SBATCH --time=48:00:00
-#SBATCH --output=logs-prediction/predict_log_%J.log
-#SBATCH --error=logs-prediction/predict_error_%J.out
+#!/usr/bin/env bash
+#SBATCH --job-name=maxatac-prepare
+#SBATCH --output=logs-prepare/%x-%j.out
+#SBATCH --error=logs-[re[are/%x-%j.out
+#SBATCH --mem-per-cpu=3G
+#SBATCH --cpus-per-task=8
+#SBATCH --time=24:00:00
 
 #####################################################################
-bigwig=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$1}" sample_sheet.txt)
-outname=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$2}" sample_sheet.txt)
+bam=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$1}" sample_sheet_prepare.txt)
+outname=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$2}" sample_sheet_prepare.txt)
+fname=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$3}" sample_sheet_prepare.txt)
+
 #####################################################################
 
-echo $bigwig
+echo $bam
 echo $outname
 
 module load anaconda3/gpu/5.2.0
 conda activate maxatac
 module unload anaconda3/gpu/5.2.0
 
-maxatac predict -tf CTCF  \
-  --signal $bigwig \
-  -o $outname \
-  --sequence /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38.2bit \
-  --blacklist /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38_maxatac_blacklist.bed \
-  --chromosome_sizes /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38.chrom.sizes
- # --chromosomes chr1
-
-rm -f sample_sheet.txt
+maxatac prepare \
+    --chrom_sizes /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38.chrom.sizes \
+    --blacklist_bed /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38_maxatac_blacklist.bed \
+    --blacklist /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38_maxatac_blacklist.bw \
+    -skip_dedup \
+    --threads "$SLURM_CPUS_PER_TASK" \
+    -i $bam -o $outname -prefix $fname
