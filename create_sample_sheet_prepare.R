@@ -1,4 +1,4 @@
-suffix=".dd.bam"
+suffix=".dd.bam$"
 bam_dir="./BAM-DD"
 
 fpath = list.files(bam_dir,pattern=suffix,full.names=T,include.dirs=F)
