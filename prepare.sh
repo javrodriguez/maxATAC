@@ -16,6 +16,7 @@ fname=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$3}" sample_sheet_prepare.txt)
 echo $bam
 echo $outname
 
+#module load condaenvs/gpu/maxatac
 module load anaconda3/gpu/5.2.0
 conda activate maxatac
 module unload anaconda3/gpu/5.2.0
