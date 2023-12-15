@@ -19,6 +19,7 @@ echo $outname
 module load anaconda3/gpu/5.2.0
 conda activate maxatac
 module unload anaconda3/gpu/5.2.0
+export PATH=/gpfs/share/apps/ucscutils/374:$PATH
 
 maxatac prepare \
     --chrom_sizes /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38.chrom.sizes \
