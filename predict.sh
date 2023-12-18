@@ -2,13 +2,13 @@
 #SBATCH -J maxatac_predict
 #SBATCH --mem=50gb
 #SBATCH --time=48:00:00
-#SBATCH --output=logs-prediction/predict_log_%J.log
-#SBATCH --error=logs-prediction/predict_error_%J.out
+#SBATCH --output=logs-prediction/%J.out
+#SBATCH --error=logs-prediction/%J.err
 
-#####################################################################
-bigwig=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$1}" sample_sheet.txt)
-outname=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$2}" sample_sheet.txt)
-#####################################################################
+################################################################################
+bigwig=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$1}" sample_sheet_predict.txt)
+outname=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$2}" sample_sheet_predict.txt)
+################################################################################
 
 echo $bigwig
 echo $outname
@@ -23,4 +23,3 @@ maxatac predict -tf CTCF  \
   --sequence /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38.2bit \
   --blacklist /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38_maxatac_blacklist.bed \
   --chromosome_sizes /gpfs/home/rodrij92/opt/maxatac/data/hg38/hg38.chrom.sizes
- # --chromosomes chr1
