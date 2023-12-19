@@ -13,6 +13,7 @@ outname=$(awk "NR==${SLURM_ARRAY_TASK_ID} {print \$2}" sample_sheet_predict.txt)
 echo $bigwig
 echo $outname
 
+module purge
 module load anaconda3/gpu/5.2.0
 conda activate maxatac
 module unload anaconda3/gpu/5.2.0
