@@ -14,9 +14,12 @@ echo $bigwig
 echo $outname
 
 module purge
-module load anaconda3/gpu/5.2.0
-conda activate maxatac
-module unload anaconda3/gpu/5.2.0
+module load condaenvs/gpu/maxatac
+module add openssl/1.0.2
+
+#module load anaconda3/gpu/5.2.0
+#conda activate maxatac
+#module unload anaconda3/gpu/5.2.0
 
 maxatac predict -tf CTCF  \
   --signal $bigwig \
