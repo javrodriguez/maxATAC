@@ -48,10 +48,12 @@ ctcf_peaks_file="/Users/javrodher/Work/RStudio-PRJs/Fatemeh_Hernandolab/results/
 ctcf_motif_file="/Users/javrodher/Work/biodata/genomes/hg38/ctcf_motif_hg38.tsv"
 top_list=c("all",seq(20000,5000,-5000))
 suffix="-maxATAC-predict"
+max_n_fimo=1000001
 
 # Load data
 ctcf_lola = read.delim(ctcf_peaks_file,header = F)
 ctcf_fimo = fread(ctcf_motif_file,header = T)
+ctcf_fimo = ctcf_fimo[1:max_n_fimo,]
 ctcf_fimo = as.data.frame(ctcf_fimo[-1,3:5])
 names(ctcf_lola)=c("chr","start","end")
 names(ctcf_fimo)=c("chr","start","end")
