@@ -71,8 +71,7 @@ write.csv(stats_lola,"predicted_ctcf_stats_lola.csv",row.names=F)
 write.csv(stats_fimo,"predicted_ctcf_stats_fimo.csv",row.names=F)
 
 # Peak count per sample
-
-pdf(peak_count.pdf)
+pdf("peak_count.pdf")
 ggplot(stats_lola[stats_lola$top=="all",],aes(x=sample,y=n_peaks))+
   geom_col()+
   theme_bw()+
@@ -82,7 +81,7 @@ ggplot(stats_lola[stats_lola$top=="all",],aes(x=sample,y=n_peaks))+
 dev.off()
                                   
 # Distribution of peak scores
-pdf(peak_scores.pdf)
+pdf("peak_scores.pdf")
 ggplot(predicted_ctcf,aes(x=score))+
   geom_histogram()+
   xlab("peak score")+
@@ -90,7 +89,7 @@ ggplot(predicted_ctcf,aes(x=score))+
 dev.off()
 
 # True positive fraction (all peaks vs top peaks) - Reference: LOLA peaks
-pdf(true_positive_lola.pdf)
+pdf("true_positive_lola.pdf")
 ggplot(stats_lola,aes(x=top,y=frac_tps))+
   geom_boxplot()+
   facet_wrap(~celltype)+
@@ -101,7 +100,7 @@ ggplot(stats_lola,aes(x=top,y=frac_tps))+
 dev.off()
 
 # True positive fraction (all peaks vs top peaks) - Reference: FIMO motifs
-pdf(true_positive_fimo.pdf)
+pdf("true_positive_fimo.pdf")
 ggplot(stats_fimo,aes(x=top,y=frac_tps))+
   geom_boxplot()+
   facet_wrap(~celltype)+
