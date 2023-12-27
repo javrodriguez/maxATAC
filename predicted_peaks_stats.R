@@ -1,6 +1,6 @@
 # Functions
 compilePeaks = function(sample,inpdir,max_n=60000){
-  x=read.delim(paste0(inpdir,"/",sample,"/maxatac_predict_32bp.bed"),header = F)
+  x=read.delim(paste0(inpdir,"/",sample,suffix,"/maxatac_predict_32bp.bed"),header = F)
   x=x[order(x$V4,decreasing = T),]
   if(nrow(x)>max_n){ x=x[1:max_n,] }
   x$V5=sample
