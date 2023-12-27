@@ -1,7 +1,8 @@
 # Functions
-compilePeaks = function(sample,inpdir){
-  x=read.delim(paste0(inpdir,"/",sample,suffix,"/maxatac_predict_32bp.bed"),header = F)
+compilePeaks = function(sample,inpdir,max_n=60000){
+  x=read.delim(paste0(inpdir,"/",sample,"/maxatac_predict_32bp.bed"),header = F)
   x=x[order(x$V4,decreasing = T),]
+  if(nrow(x)>max_n){ x=x[1:max_n,] }
   x$V5=sample
   x$V6=1:nrow(x)
   return(x)
@@ -39,6 +40,7 @@ getStats=function(predicted_ctcf,ctcf_ref,top_list,ss){
 library(data.table)
 library(ggplot2)
 library(dplyr)
+library(GenomicRanges)
 
 # Set parameters
 inpdir="/Users/javrodher/Work/RStudio-PRJs/Fatemeh_Hernandolab//data/maxATAC/"
