@@ -35,7 +35,7 @@ getStats=function(predicted_ctcf,ctcf_ref,top_list,ss){
   DF$top=factor(DF$top,levels=top_list)
   return(DF)
 }
-
+                     
 # Load libraries
 library(data.table)
 library(ggplot2)
@@ -49,6 +49,8 @@ ctcf_motif_file="/Users/javrodher/Work/biodata/genomes/hg38/ctcf_motif_hg38.tsv"
 top_list=c("all",seq(20000,5000,-5000))
 suffix="-maxATAC-predict"
 max_n_fimo=1000001
+
+setwd(inpdir)
 
 # Load data
 ctcf_lola = read.delim(ctcf_peaks_file,header = F)
