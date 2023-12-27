@@ -23,7 +23,9 @@ getStats=function(predicted_ctcf,ctcf_ref,top_list,ss){
     predicted$overlap_lola[unique(ovl$queryHits)]=T
     tps = as.data.frame(table(predicted$sample[predicted$overlap_lola==T]))
     fps = as.data.frame(table(predicted$sample[predicted$overlap_lola==F]))
-    df=data.frame(sample=tps$Var1,tps=tps$Freq,fps=fps$Freq,stringsAsFactors = F)
+    df=data.frame(sample=tps$Var1,tps=0,fps=0,stringsAsFactors = F)
+    df$tps[df$sample %in% tps$Var1]=tps$Freq
+    df$fps[df$sample %in% fps$Var1]=fps$Freq
     df$n_peaks=df$tps+df$fps
     df$frac_tps=df$tps/df$n_peaks
     df$top=top
