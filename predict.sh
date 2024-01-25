@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH-J maxatac_predict
-#SBATCH --time=72:00:00
+#SBATCH --time=6:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8 
-#SBATCH --mem-per-cpu=8G
+#SBATCH --mem-per-cpu=4G
 #SBATCH --output=logs-prediction/%J.out
 #SBATCH --error=logs-prediction/%J.err
 
